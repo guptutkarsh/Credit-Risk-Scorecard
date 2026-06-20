@@ -1,0 +1,6 @@
+metric,value
+AUC,0.6958
+GINI,0.3916
+KS,28.2
+Brier,0.1432
+PSI(train-test),0.0

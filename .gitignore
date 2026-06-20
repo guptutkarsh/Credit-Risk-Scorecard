@@ -1,0 +1,18 @@
+# Data files — too large for GitHub, available from Kaggle
+data/*.csv
+data/*.csv.gz
+data/*.gz
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Models — pickled statsmodels objects retain full training data (large).
+# Coefficients are committed as CSV instead for reproducibility.
+*.pkl
+outputs/*.pkl
+
+# OS
+Thumbs.db
+.DS_Store
