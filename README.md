@@ -148,15 +148,5 @@ Run the notebooks in order (Sessions 1–6). Fixed random seed (42) ensures repr
 
 ---
 
-## 10. What I Would Do Differently in Production
-
-- Separate 12-month and lifetime PD term structures for IFRS 9-compliant ECL
-- Calibrate LGD and EAD from realised recovery data rather than regulatory assumptions
-- Define SICR via origination-vs-reporting PD migration, not static thresholds
-- Establish out-of-time and ongoing PSI monitoring with rebuild triggers
-- Add reject-inference to correct for the through-the-door population bias
-
----
-
 *Author: Utkarsh Gupta — FRM Part I & II Passed (GARP, 2025–2026), MBA (IIM Kozhikode).
 Built as an applied credit-risk modelling exercise with full SR 11-7 documentation.*
