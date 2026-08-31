@@ -1,7 +1,7 @@
-# Credit Risk PD Model & Scorecard — Lending Club
+# Credit Risk PD Model & Scorecard
 
 An end-to-end Probability of Default (PD) model, application scorecard, IFRS 9 staging,
-and Expected Credit Loss (ECL) engine built on Lending Club loan data. Developed and
+and Expected Credit Loss (ECL) engine built on LC loan data. Developed and
 documented in line with **SR 11-7** model risk management principles — covering model
 development, validation, assumptions, and limitations.
 
@@ -9,7 +9,7 @@ development, validation, assumptions, and limitations.
 
 ## 1. Executive Summary (Risk Committee View)
 
-A logistic regression PD model was developed on **1.26 million** Lending Club accepted loans
+A logistic regression PD model was developed on **1.26 million** LC accepted loans
 to rank borrower default risk, scale it into a usable credit score, and quantify expected
 loss under IFRS 9.
 
@@ -41,7 +41,7 @@ expected loss for provisioning under IFRS 9. This project delivers all three.
 
 ## 3. Data
 
-- **Source:** Lending Club accepted loans (2007–2018), `accepted_2007_to_2018Q4.csv.gz`
+- **Source:** LC accepted loans (2007–2018), `accepted_2007_to_2018Q4.csv.gz`
 - **Volume:** first 2,000,000 rows read (151 raw columns) → **1,260,344** loans after censoring
 - **Target definition:** `loan_status` → 1 if *Charged Off*, *Default*, or
   *Does not meet the credit policy: Charged Off*; else 0. **Base default rate = 19.20%**
@@ -115,7 +115,7 @@ The first fit flagged two problems, both resolved before the model was accepted:
   direction, so it was removed for **sign integrity**. (At 882k rows, p < 0.05 is cheap —
   significance was not treated as evidence the sign was trustworthy.)
 - **`int_rate` ↔ `grade` redundancy** — the real collinearity in the model, surfaced only by VIF:
-  **9.60 / 9.49** (on Lending Club, grade determines the interest rate). Both sit under the
+  **9.60 / 9.49** (on LC, grade determines the interest rate). Both sit under the
   VIF > 10 "severe" threshold, both are significant and correctly signed, so **both retained**
   with the redundancy documented rather than silently dropped.
 
@@ -234,7 +234,7 @@ decision, not a modelling one — the model's job is to price the tradeoff.
    Production still requires *ongoing* PSI monitoring on live scoring data with a formal
    rebuild trigger (e.g. PSI > 0.25) and seasonality controls.
 6. **ECL coverage (9.25%)** — elevated versus a typical 3–8% consumer book, driven by
-   removal of `Current` loans, Lending Club's risk profile, and the conservative LGD.
+   removal of `Current` loans, LC's risk profile, and the conservative LGD.
 7. **Missing-value bin in `grade`** — 15 loans have a null grade and form their own WoE bin.
    With zero observed defaults, Laplace smoothing assigns them WoE **+1.997**, i.e. the
    *safest* bin in the model. The population is negligible (0.002%) so results are unaffected,
@@ -250,7 +250,7 @@ decision, not a modelling one — the model's job is to price the tradeoff.
     Club's own underwriting decision, which caps achievable AUC and would not transfer to a
     lender without an equivalent pre-existing grade.
 11. **Reject inference not applied** — the sample contains accepted loans only, so the model is
-    fitted on a through-the-door population already filtered by Lending Club's credit policy.
+    fitted on a through-the-door population already filtered by LC's credit policy.
 
 ---
 
@@ -275,7 +275,7 @@ credit-risk-scorecard/
 pip install pandas numpy scikit-learn matplotlib seaborn statsmodels scipy joblib
 ```
 
-Download `accepted_2007_to_2018Q4.csv.gz` from the Lending Club Kaggle dataset into `data/`,
+Download `accepted_2007_to_2018Q4.csv.gz` from the LC Kaggle dataset into `data/`,
 then run `notebooks/Project 1.ipynb` top to bottom. Fixed random seed (42) ensures
 reproducibility. Note that file paths in the notebook are absolute Windows paths and need
 repointing on another machine.
