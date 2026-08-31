@@ -16,3 +16,5 @@ outputs/*.pkl
 # OS
 Thumbs.db
 .DS_Store
+EXPLAINERS.md
+PANDAS_CHEATSHEET.md
